@@ -515,7 +515,8 @@ function merge(){
                     for(var k = 0; k < matchData.length; k++){
                         insertData = insertData.replace(matchData[k], matchData[k] + "_Mg" + (i + 1));
                     }
-                    var reg = new RegExp('\\s+<packagedElement xmi:type="uml:Class" xmi:id="' + merges[j].id);
+                    //var reg = new RegExp('\\s+<packagedElement xmi:type="uml:Class" xmi:id="' + merges[j].id);
+                    var reg = new RegExp('\\s+<packagedElement xmi:type="uml:Class" xmi:id="[\\w-.]+" name="' + merges[j].mergeInto);
                     var matchData = data.match(reg)[0];
                     var insertIndex = data.indexOf(matchData);
                     insertIndex = data.indexOf("</packagedElement>", insertIndex);
