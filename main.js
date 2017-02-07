@@ -990,13 +990,6 @@ function copyClass(){
             console.log("The module of copy class finished.");
         }
 
-
-
-
-        
-
-
-
         fs.writeFileSync("./project/" + clientFileName, data);
     }catch (e){
         console.log(e.stack);
@@ -1537,6 +1530,11 @@ function createKey(cb){
 
 function parseModule(fileName){                     //XMLREADER read xml files
     var xml = fs.readFileSync("./project/" + fileName, {encoding: 'utf8'});
+    if(xml[xml.indexOf("\n") - 1] != "\r"){       // Line end with "\n" in Linux, we replace all "\n" to "\r\n"
+        //xml = xml.replace(/\n/g,"\r\n");
+        xml = xml.replace(new RegExp('[^\\r]\n'), "\r\n");
+    }
+    fs.writeFileSync("./project/" + fileName, xml);
     xmlreader.read(xml, function(error, model) {
         if (error) {
             console.log('There was a problem reading data from ' + fileName + '. Please check your xmlreader module and nodejs!\t\n' + error.stack);
